@@ -7,8 +7,6 @@
 
 
 ####COMPONENTS
-- add ability to force reset all view components between runs after stream completion)
-	- maybe move results to a last-run component on bottom of page?
 - add another implementation of the stream sampling algorithm sorting by a random key
 - refactor generator into testable JS component
 	- and write tests!

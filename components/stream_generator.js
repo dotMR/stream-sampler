@@ -4,13 +4,14 @@ var StreamGenerator = React.createClass({
     propTypes: {
         onData: React.PropTypes.func.isRequired,
         onClose: React.PropTypes.func,
+        resetComponent: React.PropTypes.bool,
         source: React.PropTypes.string,
         openStream: React.PropTypes.bool
     },
 
     getInitialState: function() {
         return {
-            status: 'ready'
+            status: 'Ready'
         };
     },
 
@@ -27,6 +28,17 @@ var StreamGenerator = React.createClass({
         else if (!nextProps.openStream && this.props.openStream) {
             this.handleStopGenerator_()
         }
+        else if (nextProps.resetComponent) {
+            this.reset_();
+        }
+    },
+
+    reset_: function() {
+        this.resetGenerator_();
+
+        this.setState({
+            status: 'Ready'
+        });
     },
 
     resetGenerator_: function() {
@@ -39,7 +51,7 @@ var StreamGenerator = React.createClass({
 
     handleStartGenerator_: function() {
         this.setState({
-            status: 'streaming...'
+            status: 'Streaming...'
         });
 
         this.resetGenerator_();
@@ -52,7 +64,7 @@ var StreamGenerator = React.createClass({
             this.props.onClose();
         }
         this.setState({
-            status: 'closed'
+            status: 'Closed'
         });
     },
 

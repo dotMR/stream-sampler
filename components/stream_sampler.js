@@ -3,12 +3,13 @@ var StreamSampler = React.createClass({
 
     propTypes: {
         data: React.PropTypes.string,
+        resetComponent: React.PropTypes.bool,
         sampleSize: React.PropTypes.number.isRequired
     },
 
     getInitialState: function() {
         return {
-            status: 'ready'
+            status: 'Ready'
         };
     },
 
@@ -16,11 +17,19 @@ var StreamSampler = React.createClass({
         if (nextProps.data) {
             var sample = nextProps.data;
             this.process_(sample);
-        } else {
             this.setState({
                 status: ''
             });
+        } else if (nextProps.resetComponent) {
+            this.reset_();
         }
+    },
+
+    reset_: function() {
+        this.resevoir_ = null;
+        this.setState({
+            status: 'Ready'
+        });
     },
 
     process_: function(sample) {

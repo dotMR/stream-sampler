@@ -3,6 +3,7 @@ var StreamAnalyzer = React.createClass({
 
     propTypes: {
         data: React.PropTypes.string,
+        resetComponent: React.PropTypes.bool,
         sampleSize: React.PropTypes.number
     },
 
@@ -22,17 +23,19 @@ var StreamAnalyzer = React.createClass({
         if (nextProps.data) {
             var sample = nextProps.data;
             this.process_(sample);
-        } else {
             this.setState({
                 status: ''
             });
+        } else if (nextProps.resetComponent) {
+            this.reset_();
         }
     },
 
     reset_: function() {
         this.setState({
             numSamples: 0,
-            freqMap: []
+            freqMap: [],
+            status: 'Ready'
         });
 
         this.allSamples_ = [];

@@ -8,6 +8,7 @@ var SampleSetupForm = React.createClass({
     propTypes: {
         sampleSize: React.PropTypes.number,
         streamInput: React.PropTypes.string,
+        onResetSimulation: React.PropTypes.func,
         onStartSimulation: React.PropTypes.func,
         onStopSimulation: React.PropTypes.func
     },
@@ -70,6 +71,13 @@ var SampleSetupForm = React.createClass({
     handleStopSimulation_: function(event) {
         event.preventDefault();
         this.props.onStopSimulation()
+    },
+
+    handleResetSimulation_: function(event) {
+        event.preventDefault();
+        if (this.props.onResetSimulation) {
+            this.props.onResetSimulation();
+        }
     },
 
     fetchSource_: function(inputSource) {
@@ -200,6 +208,13 @@ var SampleSetupForm = React.createClass({
                     onClick: this.handleStopSimulation_,
                     type: 'submit',
                     value: 'Stop Simulation',
+                }
+            ),
+            React.createElement("input",
+                {
+                    onClick: this.handleResetSimulation_,
+                    type: 'submit',
+                    value: 'Reset All',
                 }
             )
         );
