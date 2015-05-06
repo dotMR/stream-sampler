@@ -37,7 +37,7 @@ var StreamSampleController = React.createClass({
                 id: 'simulator'
             },
             React.createElement("h2", {}, "Visual Stream Sampling Simulator"),
-            React.createElement("p", {}, "This simulator generates a random and (hopefully) representative sample from the incoming input stream of uknown length."),
+            React.createElement("p", {}, "This simulator generates a random and (hopefully) representative sample from the incoming input stream of unknown length."),
             React.createElement("p", {}, "Note: currently you need to reload the page between runs so the components are refreshed. Still working on that..."),
             React.createElement(SampleSetupForm,
                 {
