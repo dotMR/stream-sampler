@@ -2,7 +2,7 @@
 ###TODOS
 
 ####UI
-- flow analytics hit map horizontally across page rather than vertical
+- display analytics hit map horizontally across page rather than vertical
 - add percentages for each sample in Analytics view
 
 
@@ -17,7 +17,9 @@
 
 
 ####TESTING
-- display list of methods that run on test page (not just success!)
+- clear out statusMessage on repeated test run
+- for now, log all test executions to console
+	- ideally render a list of methods that run on test page (not just success!)
 - add test case for Utils.fetchFromURL
 - add tests for React view components
 	- form validation
