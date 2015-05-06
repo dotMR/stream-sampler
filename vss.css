@@ -12,6 +12,13 @@
     margin-top: 13px;
 }
 
+.github-ribbon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+}
+
 h3 {
     margin-top: 3px;
 }

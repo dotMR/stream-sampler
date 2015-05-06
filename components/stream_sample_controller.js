@@ -37,6 +37,7 @@ var StreamSampleController = React.createClass({
                 id: 'simulator'
             },
             React.createElement("h2", {}, "Visual Stream Sampling Simulator"),
+            React.createElement("p", {}, "This simulator generates a random and (hopefully) representative sample from the incoming input stream of uknown length."),
             React.createElement(SampleSetupForm,
                 {
                     sampleSize: this.state.sampleSize,

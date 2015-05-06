@@ -1,23 +1,12 @@
 ###TODOS
 
-####DOCS
-- review README and add appropriate links
-- add note about min browser requirements, test on FF
-	- Chrome 24, FF 15: performance.now()
-	- Chrome ?, FF ?: native Promises
-- Add more prominent link to test harness on README
-
-
 ####UI
-- add description to main component to talk about goal of simulator
-- update Analytics component to show same number of top samples as sampler
-- add view element to analytics to suggest which samples you are seeing
-	- 'Top k samples in stream'
 - make it easier to stream remote data
 	- possibly add button next to input to load local random file data?
-
-
 - flow analytics hit map horizontally across page rather than vertical
+
+- add other stats to view
+	- samplesSeen, evictions, percentages
 - disable buttons when applicable (Can't start when running, etc
 
 

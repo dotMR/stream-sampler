@@ -2,7 +2,8 @@ var StreamAnalyzer = React.createClass({
     displayName: 'StreamAnalyzer',
 
     propTypes: {
-        data: React.PropTypes.string
+        data: React.PropTypes.string,
+        sampleSize: React.PropTypes.number
     },
 
     getInitialState: function() {
@@ -72,7 +73,7 @@ var StreamAnalyzer = React.createClass({
             freqMap.push(newData)
         }
 
-        var sorted = this.sortAndSliceSampleFrequency_(freqMap, 5);
+        var sorted = this.sortAndSliceSampleFrequency_(freqMap, this.props.sampleSize);
         var end = performance.now();
 
         var time = (end - start).toFixed(3);
@@ -101,17 +102,26 @@ var StreamAnalyzer = React.createClass({
         return sample;
     },
 
+    getSamplesCountComponent_: function() {
+        if (this.state.numSamples <= 0) {
+            return null;
+        }
+
+        return React.createElement("span", {}, "Samples Seen: " + this.state.numSamples);
+    },
+
     render: function() {
         return React.createElement("section",
             {
                 id: 'stream-sampler'
             },
-            React.createElement("h3", {}, "Stream Analysis"),
+            React.createElement("h3", {}, "Analytics"),
             React.createElement("div", {}, this.state.status),
-            React.createElement("div", {}, "Samples: " + this.state.numSamples),
+            this.getSamplesCountComponent_(),
             React.createElement(ResultsMap,
                 {
-                    results: this.state.freqMap
+                    results: this.state.freqMap,
+                    sampleSize: this.props.sampleSize
                 },
                 this.state.allSamples_
             )
@@ -123,21 +133,32 @@ var ResultsMap = React.createClass({
     displayName: 'ResultsMap',
 
     propTypes: {
-        results: React.PropTypes.array.isRequired
+        results: React.PropTypes.array.isRequired,
+        sampleSize: React.PropTypes.number
     },
 
     render: function() {
+        if (!this.props.results || this.props.results.length == 0) {
+            return null;
+        }
+
         var members = [];
         this.props.results.forEach( function(result) {
             members.push(React.createElement("dt", { key: result.data }, result.data));
             members.push(React.createElement("dd", { key: result.data + result.hits}, result.hits));
         });
 
-        return React.createElement("dl",
+        return React.createElement("div",
             {
-                id: 'status'
+                id: 'results-map'
             },
-            members
+            React.createElement("h4", {}, "Top " + this.props.sampleSize + " samples"),
+            React.createElement("dl",
+                {
+                    id: 'status'
+                },
+                members
+            )
         );
     }
 });
