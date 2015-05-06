@@ -19,12 +19,7 @@
 
 
 ####TESTING
-- move test cases to test folder
-- implement test harness as page with button to execute
-	- show status in page rather than alert
-	- way to show which methods run easily?
-
-
+- display list of methods that run on test page (not just success!)
 - add test case for Utils.fetchFromURL
 - add tests for React view components
 	- form validation
