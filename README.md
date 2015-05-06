@@ -1,5 +1,5 @@
 ###Stream Sampling Simulator
-This is a browser-only JavaScript streaming simulator utilizing the concept of Reservoir Sampling.
+This is a browser-only JavaScript streaming simulator utilizing the concept of [Reservoir Sampling](http://en.wikipedia.org/wiki/Reservoir_sampling).
 
 [Try it!](http://dotmr.github.io/stream-sampler/)
 
