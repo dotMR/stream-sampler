@@ -2,6 +2,9 @@
 var SampleSetupForm = React.createClass({
     displayName: 'SampleSetupForm',
 
+    SOURCE_INPUT: 0,
+    SOURCE_URL: 1,
+
     propTypes: {
         sampleSize: React.PropTypes.number,
         streamInput: React.PropTypes.string,
@@ -13,11 +16,18 @@ var SampleSetupForm = React.createClass({
         return {
             sampleSize: 10,
             statusMessage: '',
+            streamSource: this.SOURCE_INPUT,
             streamInput: 'THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG',
             streamInputInvalid: false,
-            urlInput: '',
+            urlInput: 'http://dotmr.github.io/stream-sampler/data/random',
             urlInputInvalid: false
         };
+    },
+
+    handleStreamSourceChange_: function(event) {
+        this.setState({
+            streamSource: event.target.value
+        });
     },
 
     handleSampleSizeChange_: function(event) {
@@ -79,22 +89,16 @@ var SampleSetupForm = React.createClass({
             var streamInput = this.state.streamInput.trim();
             var urlInput = this.state.urlInput.trim();
 
-            if (streamInput == '' && urlInput == '') {
-                this.setState({
-                    streamInputInvalid: true,
-                    urlInputInvalid: true
-                });
-                reject(Error('Please provide an input value for the incoming stream'));
-            } else if (streamInput != '' && urlInput != '') {
-                this.setState({
-                    streamInputInvalid: true,
-                    urlInputInvalid: true
-                });
-                reject(Error('Please provide only one value for the incoming stream'));
-            } else if (streamInput != '' && urlInput == '') {
+            if (this.state.streamSource == this.SOURCE_INPUT) {
+                if (streamInput == '') {
+                    this.setState({
+                        streamInputInvalid: true
+                    });
+                    reject(Error('Please provide an input value for the incoming stream'));
+                }
                 resolve(streamInput);
-            } else if (urlInput != '' && streamInput == '') {
-                if (!Utils.isValidURL(urlInput)) {
+            } else if (this.state.streamSource == this.SOURCE_URL) {
+                if (urlInput == '' || !Utils.isValidURL(urlInput)) {
                     this.setState({
                         urlInputInvalid: true
                     });
@@ -102,8 +106,40 @@ var SampleSetupForm = React.createClass({
                 }
                 resolve(urlInput);
             }
-            reject(Error('Invalid Input'));
+            reject(Error('? How did you get here?'));
         }.bind(this));
+    },
+
+    getInputHere_: function() {
+        if (this.state.streamSource != this.SOURCE_INPUT) {
+            return null;
+        }
+
+        return React.createElement("input",
+            {
+                id: 'streamInput',
+                className: this.state.streamInputInvalid ? 'invalid' : '',
+                onChange: this.handleStreamInputChange_,
+                type: 'text',
+                value: this.state.streamInput
+            }
+        );
+    },
+
+    getInputURL_: function() {
+        if (this.state.streamSource != this.SOURCE_URL) {
+            return null;
+        }
+
+        return React.createElement("input",
+            {
+                id: 'urlInput',
+                className: this.state.urlInputInvalid ? 'invalid' : '',
+                onChange: this.handleURLInputChange_,
+                type: 'text',
+                value: this.state.urlInput
+            }
+        );
     },
 
     render: function() {
@@ -111,26 +147,18 @@ var SampleSetupForm = React.createClass({
             {
                 id: 'stream-input-form'
             },
-            React.createElement("label", {htmlFor: 'streamInput'}, 'Input Stream'),
-            React.createElement("input",
+            React.createElement("label", {htmlFor: 'streamSource'}, 'Stream Source'),
+            React.createElement("select",
                 {
-                    id: 'streamInput',
-                    className: this.state.streamInputInvalid ? 'invalid' : '',
-                    onChange: this.handleStreamInputChange_,
-                    type: 'text',
-                    value: this.state.streamInput,
-                }
+                    id: 'streamSource',
+                    onChange: this.handleStreamSourceChange_,
+                    value: this.state.streamSource,
+                },
+                React.createElement("option", { value: this.SOURCE_INPUT }, "Input here"),
+                React.createElement("option", { value: this.SOURCE_URL }, "Fetch from URL")
             ),
-            React.createElement("label", {htmlFor: 'urlInput'}, 'Input URL'),
-            React.createElement("input",
-                {
-                    id: 'urlInput',
-                    className: this.state.urlInputInvalid ? 'invalid' : '',
-                    onChange: this.handleURLInputChange_,
-                    type: 'text',
-                    value: this.state.urlInput,
-                }
-            ),
+            this.getInputHere_(),
+            this.getInputURL_(),
             React.createElement("label", {htmlFor: 'sampleSize'}, 'Sample Size'),
             React.createElement("select",
                 {

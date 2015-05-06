@@ -16,9 +16,6 @@ var StreamSampler = React.createClass({
         if (nextProps.data) {
             var sample = nextProps.data;
             this.process_(sample);
-            this.setState({
-                status: 'received: ' + sample
-            });
         } else {
             this.setState({
                 status: ''
@@ -31,10 +28,14 @@ var StreamSampler = React.createClass({
             this.resevoir_ = new SampleReservoir(this.props.sampleSize);
         }
         this.resevoir_.add(sample);
+    },
 
-        this.setState({
-            status: 'received: ' + sample
-        });
+    getCurrentDataComponent_: function() {
+        if (!this.props.data || this.props.data == '') {
+            return null;
+        }
+
+        return React.createElement("span", {}, 'Received: ' + this.props.data)
     },
 
     render: function() {
@@ -43,6 +44,7 @@ var StreamSampler = React.createClass({
                 id: 'stream-sampler'
             },
             React.createElement("h3", {}, "Representative Samples"),
+            this.getCurrentDataComponent_(),
             React.createElement("div", {}, this.state.status),
             React.createElement("div", {}, (this.resevoir_) ? this.resevoir_.samples() : '')
         );

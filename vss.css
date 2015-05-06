@@ -45,7 +45,7 @@ input[type="submit"] {
 }
 
 input:not([type="submit"]) {
-    width: 550px;
+    width: 100%;
     margin-bottom: 13px
 }
 
