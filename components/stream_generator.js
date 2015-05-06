@@ -1,8 +1,3 @@
-/**
- * TODO:
- *    Refactor generator into external component (and write exhaustive tests)
- *    How to handle newlines / whitespace characters?
- */
 var StreamGenerator = React.createClass({
     displayName: 'StreamGenerator',
 

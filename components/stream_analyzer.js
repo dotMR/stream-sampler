@@ -1,10 +1,3 @@
-/**
- * TODO:
- *    Refactor utility hitMap generation into frequency_map.js component
- *    Any benefit of moving the calculations to a worker thread? (or too much overhead on setup?)
- *    Make hitMap flow across window rather than vertical list
- *    Add View element to describe view (Top 'n' elements)
- */
 var StreamAnalyzer = React.createClass({
     displayName: 'StreamAnalyzer',
 
@@ -66,7 +59,6 @@ var StreamAnalyzer = React.createClass({
         });
     },
 
-    // TODO: investigate moving to worker thread and running only once at for LARGE data sets
     trackFrequency_: function(sample) {
         var freqMap = this.state.freqMap;
 
@@ -97,7 +89,6 @@ var StreamAnalyzer = React.createClass({
         this.trackFrequency_(sample);
     },
 
-    // TODO: investigate implement as worker thread for LARGE data sets
     sortAndSliceSampleFrequency_: function(freqMap, numSlice) {
 
         var sorted = Utils.sortByHits(freqMap);

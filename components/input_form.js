@@ -1,7 +1,4 @@
-/**
- * TODO:
- *    Disable buttons when applicable (Can't start when running, etc)
- */
+
 var SampleSetupForm = React.createClass({
     displayName: 'SampleSetupForm',
 

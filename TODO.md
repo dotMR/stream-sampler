@@ -1,20 +1,49 @@
-// merge all TODOS from code here for triage
+###TODOS
 
-Min browser: Chrome 24, FF 15 (performance.now())
+####DOCS
+- review README and add appropriate links
+- add note about min browser requirements, test on FF
+	- Chrome 24, FF 15: performance.now()
+	- Chrome ?, FF ?: native Promises
+- Add more prominent link to test harness on README
 
-// TODO:
-// links to make info clearer (app > repository)
-// easily populate random file on form (small button?)
-// link to test harness more prominent
 
-// force reset between runs (move results to last run components?)
-// update top n samples in analysis to be same as sample size
-// flow samples across
-// move generator to test
-// show test harness results on page rather than alert
+####UI
+- add description to main component to talk about goal of simulator
+- update Analytics component to show same number of top samples as sampler
+- add view element to analytics to suggest which samples you are seeing
+	- 'Top k samples in stream'
+- make it easier to stream remote data
+	- possibly add button next to input to load local random file data?
 
-// run tests from test page, not automatically
-//	-> then can show status on page.
-	-> how to show results?
 
-// problems with not using state in some components (variables instead?)
+- flow analytics hit map horizontally across page rather than vertical
+- disable buttons when applicable (Can't start when running, etc
+
+
+####COMPONENTS
+- add ability to force reset all view components between runs after stream completion)
+	- maybe move results to a last-run component on bottom of page?
+
+
+- refactor hitMap component into testable JS component
+- refactor generator into testable JS component
+	- and write tests!
+- handle newline / whitespace characters in the stream
+- investigate benefit of moving calculations to JS worker threads (better, or too much overhead for setup?)
+- add ability to vary/control speed of stream (or make some random)>
+
+
+####TESTING
+- move test cases to test folder
+- implement test harness as page with button to execute
+	- show status in page rather than alert
+	- way to show which methods run easily?
+
+
+- add test case for Utils.fetchFromURL
+- add tests for React view components
+	- form validation
+	- form input data passing
+	- generator / stream functionality
+	- start/stop simulation

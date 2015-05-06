@@ -1,12 +1,3 @@
-/**
- * TODO:
- *    Test case for fetch Utils.fetchFromURL
- *    Investigate testing React components:
- *        - form validation
- *        - form input data passing
- *        - generator / stream functionality
- *        - start/stop simulation 
- */
 function onDOMContentLoaded() {
     runTests()
     .then(function(message) {
