@@ -2,7 +2,6 @@
 ###TODOS
 
 ####UI
-- display analytics hit map horizontally across page rather than vertical
 - add percentages for each sample in Analytics view
 
 
