@@ -7,14 +7,12 @@
 
 
 ####COMPONENTS
-- add another implementation to stream sampler (pure random and keep top-k results?)
 - add ability to force reset all view components between runs after stream completion)
 	- maybe move results to a last-run component on bottom of page?
-
-- refactor hitMap component into testable JS component
+- add another implementation of the stream sampling algorithm sorting by a random key
 - refactor generator into testable JS component
 	- and write tests!
-- handle newline / whitespace characters in the stream
+- refactor hitMap component into testable JS component
 - investigate benefit of moving calculations to JS worker threads (better, or too much overhead for setup?)
 
 
@@ -30,3 +28,4 @@
 
 ####NIT-PICKY THINGS
 - disable form buttons when applicable (Can't start simulation when already running, etc)
+- should I not allow whitespace / newline characters?
