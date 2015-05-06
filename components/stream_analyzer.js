@@ -147,21 +147,21 @@ var ResultsMap = React.createClass({
 
         var members = [];
         this.props.results.forEach( function(result) {
-            members.push(React.createElement("dt", { key: result.data }, result.data));
-            members.push(React.createElement("dd", { key: result.data + result.hits}, result.hits));
+            members.push(
+                React.createElement("div",
+                    {
+                        id: 'result-' + result.data,
+                        className: 'result'
+                    },
+                    React.createElement("div", { key: result.data, className: 'result-sample' }, result.data),
+                    React.createElement("div", { key: result.hits, className: 'result-hits' }, result.hits)
+                )
+            );
         });
 
-        return React.createElement("div",
-            {
-                id: 'results-map'
-            },
+        return React.createElement("div", {},
             React.createElement("h4", {}, "Top " + this.props.sampleSize + " samples"),
-            React.createElement("dl",
-                {
-                    id: 'status'
-                },
-                members
-            )
+            React.createElement("div", { className: 'results-map' }, members)
         );
     }
 });

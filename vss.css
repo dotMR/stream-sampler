@@ -19,6 +19,27 @@
     border: 0;
 }
 
+.result, .results-map {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.result {
+    width: 70px;
+    margin-left: 7px;
+}
+
+.results-map {
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.result-sample {
+    width: 30px;
+    font-size: 150%;
+}
+
 h3 {
     margin-top: 3px;
 }
