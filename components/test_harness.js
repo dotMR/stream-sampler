@@ -29,6 +29,7 @@ var TestController = React.createClass({
                 id: 'test-harness'
             },
             React.createElement("h2", {}, "Test Harness"),
+            React.createElement("p", {}, "This will execute all of the tests in the test/test-suite.js file. Overall success or the first error will be shown below."),
             React.createElement("form",
                 {
                     id: 'test-input-form'
