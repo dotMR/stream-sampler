@@ -12,9 +12,9 @@ SampleReservoir.prototype.reset = function() {
 }
 
 SampleReservoir.prototype.add = function(sample) {
+    this.samplesSeen_++;
     if (this.samples_.length < this.sampleSize_) {
         this.samples_.push(sample);
-        this.samplesSeen_++;
         console.log('added ' + sample + ' to resevoir');
     }
     else {
