@@ -10,6 +10,10 @@ var TestController = React.createClass({
     handleStartTests_: function(event) {
         event.preventDefault();
 
+        this.setState({
+            statusMessage: 'Starting Tests'
+        });
+
         runTestSuite()
         .then( function(result) {
             this.setState({

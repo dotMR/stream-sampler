@@ -1,12 +1,11 @@
 
 ###TODOS
-- add another implementation of the stream sampling algorithm sorting by a random key
-- TEST: clear out statusMessage on repeated test run
+- Create another implementation of the stream sampling algorithm using a random key (keep top k values)random key
 
 
 ####UI
-- add percentages or (1:4) view to each sample displayed in analytic view (maybe on hover?)
-- How to visually show which entries from most common element display in results?
+- Create a way to visually reference the representative samples and the analytics (color-code values that show up in both?)
+
 
 ####COMPONENTS
 - refactor generator into testable JS component

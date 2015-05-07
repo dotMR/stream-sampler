@@ -154,7 +154,7 @@ var ResultsMap = React.createClass({
                         key: 'result-' + result.data
                     },
                     React.createElement("div", { key: result.data, className: 'result-sample' }, result.data),
-                    React.createElement("div", { key: result.hits, className: 'result-hits' }, result.hits)
+                    React.createElement("div", { key: result.data + '_hits', className: 'result-hits' }, result.hits)
                 )
             );
         });
