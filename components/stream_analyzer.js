@@ -150,8 +150,8 @@ var ResultsMap = React.createClass({
             members.push(
                 React.createElement("div",
                     {
-                        id: 'result-' + result.data,
-                        className: 'result'
+                        className: 'result',
+                        key: 'result-' + result.data
                     },
                     React.createElement("div", { key: result.data, className: 'result-sample' }, result.data),
                     React.createElement("div", { key: result.hits, className: 'result-hits' }, result.hits)

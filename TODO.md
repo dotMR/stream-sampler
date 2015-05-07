@@ -1,12 +1,14 @@
 
 ###TODOS
+- add another implementation of the stream sampling algorithm sorting by a random key
+- TEST: clear out statusMessage on repeated test run
+
 
 ####UI
-- add percentages for each sample in Analytics view
-
+- add percentages or (1:4) view to each sample displayed in analytic view (maybe on hover?)
+- How to visually show which entries from most common element display in results?
 
 ####COMPONENTS
-- add another implementation of the stream sampling algorithm sorting by a random key
 - refactor generator into testable JS component
 	- and write tests!
 - refactor hitMap component into testable JS component
@@ -14,7 +16,6 @@
 
 
 ####TESTING
-- clear out statusMessage on repeated test run
 - for now, log all test executions to console
 	- ideally render a list of methods that run on test page (not just success!)
 - add test case for Utils.fetchFromURL

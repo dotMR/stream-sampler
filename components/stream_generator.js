@@ -72,7 +72,11 @@ var StreamGenerator = React.createClass({
         var data = this.nextChunk_();
 
         if (data) {
-            console.log('Streaming ' + data);
+            var message = 'Streaming: ' + data;
+            this.setState({
+                status: message
+            });
+            console.log(message);
             this.props.onData(data);
         } else {
             this.handleStopGenerator_();
