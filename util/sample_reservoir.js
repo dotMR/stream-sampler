@@ -30,3 +30,7 @@ SampleReservoir.prototype.add = function(sample) {
 SampleReservoir.prototype.samples = function() {
     return this.samples_;
 }
+
+SampleReservoir.prototype.samplesSeen = function() {
+    return this.samplesSeen_;
+}
