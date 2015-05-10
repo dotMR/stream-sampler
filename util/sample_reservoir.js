@@ -14,14 +14,14 @@ SampleReservoir.prototype.reset = function() {
 SampleReservoir.prototype.add = function(sample) {
     this.samplesSeen_++;
     if (this.samples_.length < this.sampleSize_) {
-        this.samples_.push(sample);
+        this.samples_.push({data: sample});
         console.log('added ' + sample + ' to resevoir');
     }
     else {
         // once buffer is full, randomly replace
         var index = Utils.generateRandomInRange(0, this.samplesSeen_-1);
         if (index < this.samples_.length) {
-            this.samples_[index] = sample;
+            this.samples_[index] = {data: sample};
             console.log('added ' + sample + ' to resevoir[i=' + index + ']');
         }
     }

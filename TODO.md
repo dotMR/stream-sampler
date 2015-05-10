@@ -15,8 +15,7 @@
 
 
 ####TESTING
-- for now, log all test executions to console
-	- ideally render a list of methods that run on test page (not just success!)
+- ideally log all tests run to UI (browser, not just console.log)
 - add test case for Utils.fetchFromURL
 - add tests for React view components
 	- form validation

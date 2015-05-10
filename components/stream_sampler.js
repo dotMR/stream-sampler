@@ -40,14 +40,60 @@ var StreamSampler = React.createClass({
         this.resevoir_.add(sample);
     },
 
+    getResultsSection_: function() {
+        if (!this.resevoir_) {
+            return null;
+        }
+
+        return React.createElement(HorizontalSampleDisplay, {
+            results: this.resevoir_.samples(),
+            title: "Reservoir Samples"
+        },
+        null
+        );
+    },
+
     render: function() {
         return React.createElement("section",
             {
                 id: 'stream-sampler'
             },
-            React.createElement("h3", {}, "Representative Samples"),
+            React.createElement("h3", {}, "Samples"),
             React.createElement("div", {}, this.state.status),
-            React.createElement("div", {}, (this.resevoir_) ? this.resevoir_.samples() : '')
+            this.getResultsSection_()
+        );
+    }
+});
+
+var HorizontalSampleDisplay = React.createClass({
+    displayName: 'HorizontalSampleDisplay',
+
+    propTypes: {
+        results: React.PropTypes.array,
+        title: React.PropTypes.string
+    },
+
+    render: function() {
+        if (!this.props.results || this.props.results.length == 0) {
+            return null;
+        }
+
+        var members = [];
+        this.props.results.forEach( function(result, index) {
+            members.push(
+                React.createElement("div",
+                    {
+                        className: 'result',
+                        key: 'result_' + index
+                    },
+                    React.createElement("div", { key: result.data, className: 'result-sample' }, result.data)
+                )
+            );
+        });
+
+        return React.createElement("div", {},
+            React.createElement("h4", {}, this.props.title),
+            React.createElement("div", { className: 'results-map' }, members)
         );
     }
 });
