@@ -1,5 +1,6 @@
 function assertEquals(context, expected, actual) {
     return new Promise(function(resolve, reject) {
+        console.log('Executing test: ' + context);
         if (expected != actual) {
             var message = 'FAIL: ' + context + " {expected: " + expected + ", actual: " + actual + "}";
             reject(Error(message));
@@ -10,6 +11,7 @@ function assertEquals(context, expected, actual) {
 
 function assertFails(context, expected, actual) {
     return new Promise(function(resolve, reject) {
+        console.log('Executing test: ' + context);
         if (expected == actual) {
             var message = 'FAIL: ' + context + " {expected: " + expected + ", actual: " + actual + "}";
             reject(Error(message));
@@ -20,6 +22,7 @@ function assertFails(context, expected, actual) {
 
 function assertRange(context, expectedMin, expectedMax, actual) {
     return new Promise(function(resolve, reject) {
+        console.log('Executing test: ' + context);
         if (expectedMin <= actual <= expectedMax) {
             resolve('Success: ' + context);
         }
