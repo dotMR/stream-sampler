@@ -14,5 +14,4 @@ This is a browser-only JavaScript streaming simulator utilizing the concept of [
 
 ####KNOWN ISSUES
 - This is a [WIP](https://github.com/dotMR/stream-sampler/blob/master/TODO.md), so expect it to be a little buggy (and not pretty)
-- Currently there is no reset in between runs, so the buffers will not be cleared out in between runs. If you're concerned about this before it is fixed, just reload the page :)
 - Please use a current browser. I didn't spend any time on compatability, so you'll need native JS Promises and other cool magic. I don't think IE will work. I'm testing in Chrome 42. My guess is you'll need at least Chrome 36, FF 31.
