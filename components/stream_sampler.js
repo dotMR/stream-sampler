@@ -3,11 +3,18 @@ var StreamSampler = React.createClass({
 
     mixins: [
         Reflux.listenTo(generatorStore, "onStreamData"),
-        Reflux.listenTo(formActionsStore, "onFormAction")
+        Reflux.listenTo(formActionsStore, "onFormAction"),
+        Reflux.listenTo(analyticsStore, "onReceiveAnalytics")
     ],
 
     componentWillMount: function() {
         this.reset_();
+    },
+
+    getInitialState: function() {
+        return {
+            frequencyMap: null
+        };
     },
 
     // TODO: How to avoid having switch statements here?
@@ -20,6 +27,7 @@ var StreamSampler = React.createClass({
             }
             case "START": {
                 this.setState({
+                    frequencyMap: null,
                     sampleSize: data.config.sampleSize
                 });
                 break;
@@ -41,9 +49,16 @@ var StreamSampler = React.createClass({
         }
     },
 
+    onReceiveAnalytics: function(freqMap) {
+        this.setState({
+            frequencyMap: freqMap
+        });
+    },
+
     reset_: function() {
         this.resevoir_ = null;
         this.setState({
+            frequencyMap: null,
             status: 'Ready'
         });
     },
@@ -61,6 +76,7 @@ var StreamSampler = React.createClass({
         }
 
         return React.createElement(HorizontalSampleDisplay, {
+            frequencyMap: this.state.frequencyMap,
             results: this.resevoir_.samples(),
             title: "Reservoir Samples"
         },
@@ -84,8 +100,27 @@ var HorizontalSampleDisplay = React.createClass({
     displayName: 'HorizontalSampleDisplay',
 
     propTypes: {
+        frequencyMap: React.PropTypes.array,
         results: React.PropTypes.array,
         title: React.PropTypes.string
+    },
+
+    foundInFreqMap_: function(result) {
+        if (!this.props.frequencyMap) {
+            return false;
+        }
+
+        return this.props.frequencyMap.some( function(item) {
+            return result.data == item.data
+        });
+    },
+
+    getResultClassName_: function(result) {
+        var className = 'result-sample';
+        if (this.foundInFreqMap_(result)) {
+            className = className + " highlighted";
+        }
+        return className;
     },
 
     render: function() {
@@ -101,10 +136,10 @@ var HorizontalSampleDisplay = React.createClass({
                         className: 'result',
                         key: 'result_' + index
                     },
-                    React.createElement("div", { key: result.data, className: 'result-sample' }, result.data)
+                    React.createElement("div", { key: result.data, className: this.getResultClassName_(result) }, result.data)
                 )
             );
-        });
+        }.bind(this));
 
         return React.createElement("div", {},
             React.createElement("h4", {}, this.props.title),

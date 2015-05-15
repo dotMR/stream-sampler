@@ -40,6 +40,12 @@
     font-size: 150%;
 }
 
+.result-sample.highlighted {
+    color: #AA2222;
+    font-size: 250%;
+
+}
+
 h3 {
     margin-top: 3px;
 }

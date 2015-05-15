@@ -24,10 +24,6 @@ var StreamAnalyzer = React.createClass({
                 });
                 break;
             }
-            case "STOP": {
-                AnalyticsActions.complete(this.state.freqMap);
-                break;
-            }
         }
     },
 
@@ -37,6 +33,10 @@ var StreamAnalyzer = React.createClass({
         switch (op.action) {
             case "STREAM_DATA": {
                 this.process_(op.data);
+                break;
+            }
+            case "STREAM_CLOSED": {
+                AnalyticsActions.complete(this.state.freqMap);
                 break;
             }
         }
