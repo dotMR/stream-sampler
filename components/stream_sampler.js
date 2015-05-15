@@ -1,28 +1,35 @@
 var StreamSampler = React.createClass({
     displayName: 'StreamSampler',
 
-    propTypes: {
-        data: React.PropTypes.string,
-        resetComponent: React.PropTypes.bool,
-        sampleSize: React.PropTypes.number.isRequired
+    mixins: [
+        Reflux.listenTo(generatorStore, "onStreamData"),
+        Reflux.listenTo(formActionsStore, "onFormAction")
+    ],
+
+    componentWillMount: function() {
+        this.reset_();
     },
 
-    getInitialState: function() {
-        return {
-            status: 'Ready'
-        };
-    },
-
-    componentWillReceiveProps: function(nextProps) {
-        if (nextProps.data) {
-            var sample = nextProps.data;
-            this.process_(sample);
-            this.setState({
-                status: ''
-            });
-        } else if (nextProps.resetComponent) {
-            this.reset_();
+    onFormAction: function(data) {
+        switch (data.action) {
+            case "RESET": {
+                this.reset_();
+                break;
+            }
+            case "START": {
+                this.setState({
+                    sampleSize: data.config.sampleSize
+                });
+                break;
+            }
         }
+    },
+
+    onStreamData: function(data) {
+        this.process_(data);
+        this.setState({
+            status: ''
+        });
     },
 
     reset_: function() {
@@ -33,9 +40,8 @@ var StreamSampler = React.createClass({
     },
 
     process_: function(sample) {
-        console.log('Received: ' + sample);
         if (!this.resevoir_) {
-            this.resevoir_ = new SampleReservoir(this.props.sampleSize);
+            this.resevoir_ = new SampleReservoir(this.state.sampleSize);
         }
         this.resevoir_.add(sample);
     },

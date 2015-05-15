@@ -1,34 +1,40 @@
 var StreamAnalyzer = React.createClass({
     displayName: 'StreamAnalyzer',
 
-    propTypes: {
-        data: React.PropTypes.string,
-        resetComponent: React.PropTypes.bool,
-        sampleSize: React.PropTypes.number
+    mixins: [
+        Reflux.listenTo(generatorStore, "onStreamData"),
+        Reflux.listenTo(formActionsStore, "onFormAction")
+    ],
+
+    componentDidMount: function() {
+        this.reset_();
+    },
+
+    onFormAction: function(data) {
+        switch (data.action) {
+            case "RESET": {
+                this.reset_();
+                break;
+            }
+            case "START": {
+                this.setState({
+                    sampleSize: data.config.sampleSize
+                });
+                break;
+            }
+        }
+    },
+
+    onStreamData: function(data) {
+        this.process_(data);
     },
 
     getInitialState: function() {
         return {
             freqMap: [],
             numSamples: 0,
-            status: 'ready'
+            status: 'Ready'
         };
-    },
-
-    componentDidMount: function() {
-        this.reset_();
-    },
-
-    componentWillReceiveProps: function(nextProps) {
-        if (nextProps.data) {
-            var sample = nextProps.data;
-            this.process_(sample);
-            this.setState({
-                status: ''
-            });
-        } else if (nextProps.resetComponent) {
-            this.reset_();
-        }
     },
 
     reset_: function() {
@@ -58,8 +64,8 @@ var StreamAnalyzer = React.createClass({
 
         var samples = this.state.numSamples;
         this.setState({
-            numSamples: samples+1,
-            freqMap: []
+            status: '',
+            numSamples: samples+1
         });
     },
 
@@ -76,7 +82,7 @@ var StreamAnalyzer = React.createClass({
             freqMap.push(newData)
         }
 
-        var sorted = this.sortAndSliceSampleFrequency_(freqMap, this.props.sampleSize);
+        var sorted = this.sortAndSliceSampleFrequency_(freqMap, this.state.sampleSize);
         var end = performance.now();
 
         var time = (end - start).toFixed(3);
@@ -124,7 +130,7 @@ var StreamAnalyzer = React.createClass({
             React.createElement(ResultsMap,
                 {
                     results: this.state.freqMap,
-                    sampleSize: this.props.sampleSize
+                    sampleSize: this.state.sampleSize
                 },
                 this.state.allSamples_
             )
