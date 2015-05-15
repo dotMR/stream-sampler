@@ -1,24 +1,31 @@
 var GeneratorActions = Reflux.createActions(["closeStream", "openStream", "streamData"]);
-
 var generatorStore = Reflux.createStore({
     listenables: GeneratorActions,
 
-    onCloseStream: function(data) {
-        console.log('stream closed');
+    onCloseStream: function() {
+        this.executeAction_('STREAM_CLOSED');
     },
 
-    onOpenStream: function(data) {
-        console.log('stream opened');
+    onOpenStream: function() {
+        this.executeAction_('STREAM_OPENED');
     },
 
     onStreamData: function(data) {
-        console.log('new data: ' + data);
-        this.trigger(data);
+        this.executeAction_('STREAM_DATA', data);
+    },
+
+    executeAction_: function(operation, data) {
+        var op = { action: operation};
+        if (data) {
+            op["data"] = data;
+        } else {
+            console.log(operation);
+        }
+        this.trigger(op);
     }
 });
 
 var FormActions = Reflux.createActions(["reset", "start", "stop"]);
-
 var formActionsStore = Reflux.createStore({
     listenables: FormActions,
 
@@ -41,18 +48,13 @@ var formActionsStore = Reflux.createStore({
         }
         this.trigger(op);
     }
-})
+});
 
-// TODO: implement start, reset of generator and have components respond as they wish
-// GOAL: less controller interference and code
+var AnalyticsActions = Reflux.createActions(["complete"]);
+var analyticsStore = Reflux.createStore({
+    listenables: AnalyticsActions,
 
-// var ConfigActions = Reflux.createActions(["sampleSizeUpdated"]);
-
-// var configStore = Reflux.createStore({
-//     listenables: ConfigActions,
-
-//     onSampleSizeUpdated: function(num) {
-//         console.log('new sample size: ' + num);
-//         this.trigger(num);
-//     }
-// });
+    onComplete: function(results) {
+        this.trigger(results);
+    }
+});

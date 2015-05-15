@@ -26,6 +26,7 @@ var StreamGenerator = React.createClass({
     },
 
     reset_: function() {
+        this.iterator_ = 0;
         this.resetGenerator_();
         this.setState({
             status: 'Ready'
@@ -33,7 +34,6 @@ var StreamGenerator = React.createClass({
     },
 
     resetGenerator_: function() {
-        this.iterator_ = 0;
         if (this.generator_) {
             window.clearInterval(this.generator_);
             this.generator_ = 0;

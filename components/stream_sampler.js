@@ -10,6 +10,8 @@ var StreamSampler = React.createClass({
         this.reset_();
     },
 
+    // TODO: How to avoid having switch statements here?
+    //   ? make actions/store more singular?
     onFormAction: function(data) {
         switch (data.action) {
             case "RESET": {
@@ -25,11 +27,18 @@ var StreamSampler = React.createClass({
         }
     },
 
-    onStreamData: function(data) {
-        this.process_(data);
-        this.setState({
-            status: ''
-        });
+    // TODO: How to avoid having switch statements here?
+    //   ? make actions/store more singular?
+    onStreamData: function(op) {
+        switch (op.action) {
+            case "STREAM_DATA": {
+                this.process_(op.data);
+                this.setState({
+                    status: ''
+                });
+                break;
+            }
+        }
     },
 
     reset_: function() {

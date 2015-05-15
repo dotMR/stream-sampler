@@ -10,6 +10,8 @@ var StreamAnalyzer = React.createClass({
         this.reset_();
     },
 
+    // TODO: How to avoid having switch statements here?
+    //   ? make actions/store more singular?
     onFormAction: function(data) {
         switch (data.action) {
             case "RESET": {
@@ -22,11 +24,22 @@ var StreamAnalyzer = React.createClass({
                 });
                 break;
             }
+            case "STOP": {
+                AnalyticsActions.complete(this.state.freqMap);
+                break;
+            }
         }
     },
 
-    onStreamData: function(data) {
-        this.process_(data);
+    // TODO: How to avoid having switch statements here?
+    //   ? make actions/store more singular?
+    onStreamData: function(op) {
+        switch (op.action) {
+            case "STREAM_DATA": {
+                this.process_(op.data);
+                break;
+            }
+        }
     },
 
     getInitialState: function() {
@@ -72,7 +85,7 @@ var StreamAnalyzer = React.createClass({
     trackFrequency_: function(sample) {
         var freqMap = this.state.freqMap;
 
-        var start = performance.now();
+        // var start = performance.now();
         var index = this.findIndex_(sample);
         if (index >= 0) {
             var hits = freqMap[index].hits;
@@ -83,11 +96,11 @@ var StreamAnalyzer = React.createClass({
         }
 
         var sorted = this.sortAndSliceSampleFrequency_(freqMap, this.state.sampleSize);
-        var end = performance.now();
+        // var end = performance.now();
 
-        var time = (end - start).toFixed(3);
-        var report = 'frequency updated in ' + time + " (ms)";
-        console.log(report);
+        // var time = (end - start).toFixed(3);
+        // var report = 'frequency updated in ' + time + " (ms)";
+        // console.log(report);
 
         this.setState({
             freqMap: sorted
