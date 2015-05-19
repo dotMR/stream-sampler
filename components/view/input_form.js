@@ -1,6 +1,5 @@
-
-var SampleSetupForm = React.createClass({
-    displayName: 'SampleSetupForm',
+var InputForm = React.createClass({
+    displayName: 'InputForm',
 
     SOURCE_INPUT: 0,
     SOURCE_URL: 1,
@@ -62,13 +61,12 @@ var SampleSetupForm = React.createClass({
 
     handleStopSimulation_: function(event) {
         event.preventDefault();
-        FormActions.stop();
+        GlobalActions.stop();
     },
 
     handleResetSimulation_: function(event) {
         event.preventDefault();
-
-        FormActions.reset();
+        GlobalActions.reset();
     },
 
     fetchSource_: function(inputSource) {
@@ -81,7 +79,7 @@ var SampleSetupForm = React.createClass({
 
     startSimulation_: function(source) {
         var config = {source: source, sampleSize: this.state.sampleSize};
-        FormActions.start(config);
+        GlobalActions.start(config);
     },
 
     validateForm_: function() {

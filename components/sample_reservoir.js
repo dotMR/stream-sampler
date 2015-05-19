@@ -22,7 +22,7 @@ SampleReservoir.prototype.add = function(sample) {
         var index = Utils.generateRandomInRange(0, this.samplesSeen_-1);
         if (index < this.samples_.length) {
             this.samples_[index] = {data: sample};
-            console.log('added ' + sample + ' to resevoir[i=' + index + ']');
+            console.log('added ' + sample + ' to resevoir @ [i=' + index + ']');
         }
     }
 }

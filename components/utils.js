@@ -1,4 +1,3 @@
-
 var Utils = {
     // Generate a random number within the range (inclusive)
     generateRandomInRange: function(min, max) {

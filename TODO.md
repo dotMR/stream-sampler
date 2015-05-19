@@ -2,19 +2,15 @@
 ###TODOS
 - Create another implementation of the stream sampling algorithm using a random key (keep top k values)random key
 
+- Add 'smart start' to stream generator. When you press 'Start' in a previously stopped stream, it will continue
+
 
 ####UI
 - Create a way to visually reference the representative samples and the analytics (color-code values that show up in both?)
 
 
-####COMPONENTS
-- refactor generator into testable JS component
-	- and write tests!
-- refactor hitMap component into testable JS component
-- investigate benefit of moving calculations to JS worker threads (better, or too much overhead for setup?)
-
-
 ####TESTING
+- writes tests for DataAnalyzer component
 - ideally log all tests run to UI (browser, not just console.log)
 - add test case for Utils.fetchFromURL
 - add tests for React view components

@@ -1,5 +1,5 @@
 function onDOMContentLoaded() {
-    var content = React.createElement(StreamSampleController,{});
+    var content = React.createElement(SimulatorController,{});
     React.render(content, document.getElementById('root'));
 }
 

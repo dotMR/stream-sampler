@@ -11,6 +11,7 @@ function runTestSuite() {
     .then(test_reservoir3)
     .then(test_reservoir4)
     .then(test_reservoir5)
+    .then(test_generator)
 }
 
 function test_randomRange() {
@@ -118,4 +119,23 @@ function test_reservoir5() {
     res.add('9');
 
     return assertEquals('reservoir: validate samplesSeen when < desired sample size', 9, res.samplesSeen());
+}
+
+function test_generator() {
+    var res = new StreamGenerator('12345');
+    var chunk1 = assertEquals('generator: validate first chunk', 1, res.nextChunk());
+    var more1 = assertEquals('generator: validate first chunk has more', true, res.hasMore());
+
+    var chunk2 = assertEquals('generator: validate second chunk', 2, res.nextChunk());
+    var more2 = assertEquals('generator: validate second chunk has more', true, res.hasMore());
+
+    var chunk3 = assertEquals('generator: validate third chunk', 3, res.nextChunk());
+    var chunk4 = assertEquals('generator: validate fourth chunk', 4, res.nextChunk());
+
+    var chunk5 = assertEquals('generator: validate fifth chunk', 5, res.nextChunk());
+    var more5 = assertEquals('generator: validate last chunk has no more', false, res.hasMore());
+
+    var end = assertEquals('generator: validate null chunk', null, res.nextChunk());
+
+    return Promise.all([chunk1, more1, chunk2, more2, chunk3, chunk4, chunk5, more5, end]);
 }
