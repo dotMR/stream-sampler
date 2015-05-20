@@ -46,21 +46,25 @@ var SimulatorController = React.createClass({
             {
                 id: 'simulator'
             },
-            React.createElement("h2", {}, "Visual Stream Sampling Simulator"),
-            React.createElement("p", {}, "Generates a random and representative sample from the incoming input stream of unknown length."),
+            React.createElement("h2", {}, "Visual Stream Sampler"),
+            React.createElement("p", {}, "Picks a random (and representative) sample from the incoming data stream of unknown length."),
+            React.createElement("p", {}, "The stream will be generated from the data source selected below."),
             React.createElement(InputForm, {}),
-            React.createElement(StreamStatus, {
-                status: this.state.streamStatus
-            }),
-            React.createElement(StreamSampler, {
-                samples: this.state.samples,
-                status: this.state.sampleStatus
+            React.createElement(Status, {
+                status: this.state.streamStatus,
+                title: "Status"
             }),
             React.createElement(StreamAnalyzer, {
                 freqMap: this.state.freqMap,
                 numSamples: this.state.numSamples,
                 sampleSize: this.state.sampleSize,
-                status: this.state.analyticStatus
+                status: this.state.analyticStatus,
+                title: "Analytics"
+            }),
+            React.createElement(StreamSampler, {
+                samples: this.state.samples,
+                status: this.state.sampleStatus,
+                title: "Random Sample"
             })
         );
     }

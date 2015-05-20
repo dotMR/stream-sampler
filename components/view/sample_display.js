@@ -24,8 +24,10 @@ var HorizontalSampleDisplay = React.createClass({
             );
         }.bind(this));
 
-        return React.createElement("div", {},
-            React.createElement("h4", {}, this.props.title),
+        return React.createElement("div",
+            {
+                id: 'sample-display'
+            },
             React.createElement("div", { className: 'results-map' }, members)
         );
     }

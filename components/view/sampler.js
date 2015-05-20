@@ -3,7 +3,8 @@ var StreamSampler = React.createClass({
 
     propTypes: {
         samples: React.PropTypes.array,
-        status: React.PropTypes.string
+        status: React.PropTypes.string,
+        title: React.PropTypes.string
     },
 
     getResultsSection_: function() {
@@ -12,8 +13,7 @@ var StreamSampler = React.createClass({
         }
 
         return React.createElement(HorizontalSampleDisplay, {
-                results: this.props.samples,
-                title: "Reservoir Samples"
+                results: this.props.samples
             }
         );
     },
@@ -23,7 +23,7 @@ var StreamSampler = React.createClass({
             {
                 id: 'stream-sampler'
             },
-            React.createElement("h3", {}, "Samples"),
+            React.createElement("h3", {}, this.props.title),
             React.createElement("div", {}, this.props.status),
             this.getResultsSection_()
         );

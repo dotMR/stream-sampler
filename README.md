@@ -1,16 +1,16 @@
 ###Visual Stream Sampler
 This is a browser-based stream sampling simulator utilizing the concept of [Reservoir Sampling](http://en.wikipedia.org/wiki/Reservoir_sampling).
 
-The simulator utilizes:
+[Try it Out!](http://dotmr.github.io/stream-sampler/)
+
+####Uses
 - [React](https://github.com/facebook/react)
 - [Reflux](https://github.com/spoike/refluxjs)
-
-[Try it Out!](http://dotmr.github.io/stream-sampler/)
 
 ####Usage
 - Provide either an input string or specify the URL of a random data set (by default a link to a [file](http://dotMR.github.io/stream-sampler/data/random) generated from [random.org](https://www.random.org/strings/?num=100&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new).
 - Select the desired length of the sample, and click 'Start Simulation'.
-- As stream data is received a random and representative sample set of the given size is picked. The most common samples are also displayed in the Analytics'section.
+- As stream data is received a random and representative sample set of the given size is picked. The most common samples are also displayed in the Analytics section.
 - You can stop the simulation at any point.
 
 ####Tests
