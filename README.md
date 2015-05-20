@@ -16,7 +16,7 @@ This is a browser-based stream sampling simulator utilizing the concept of [Rese
 ####Tests
 - There is a built-in test harness for some of the critical functionality. Visit [test](http://dotmr.github.io/stream-sampler/test.html) to see the results.
 
-####KNOWN ISSUES
+####Known Issues
 - Please use a current browser. I didn't spend any time on compatability, so you'll need native JS Promises and other cool magic. I don't think IE will work. I'm testing in Chrome 42. My guess is you'll need at least Chrome 36, FF 31.
 
 - This is a [WIP](https://github.com/dotMR/stream-sampler/blob/master/TODO.md), so expect it to be a little buggy (and not pretty)
