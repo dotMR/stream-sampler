@@ -46,6 +46,25 @@
 
 }
 
+body {
+    background-color: #fdfdfd;
+    color: #111;
+    font-family: "Times New Roman", Times, serif;
+}
+
+dl {
+    width: 150px;
+}
+
+dt {
+    width: 30px;
+    font-size: 150%;
+}
+
+dd {
+    width: 100%
+}
+
 h3 {
     margin-top: 3px;
 }
@@ -57,12 +76,12 @@ section {
     margin-bottom: 9px;
 }
 
-form > label,input,select {
-    display: block;
-}
-
 select {
     margin-bottom: 13px
+}
+
+form > label,input,select {
+    display: block;
 }
 
 input[type="submit"] {
@@ -78,17 +97,4 @@ input:not([type="submit"]) {
 
 input.invalid {
     border: 1px solid red;
-}
-
-dl {
-    width: 150px;
-}
-
-dt {
-    width: 30px;
-    font-size: 150%;
-}
-
-dd {
-    width: 100%
 }

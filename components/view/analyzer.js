@@ -5,7 +5,8 @@ var StreamAnalyzer = React.createClass({
         freqMap: React.PropTypes.array,
         numSamples: React.PropTypes.number,
         sampleSize: React.PropTypes.number,
-        status: React.PropTypes.string
+        status: React.PropTypes.string,
+        title: React.PropTypes.string
     },
 
     getSamplesCountComponent_: function() {
@@ -13,7 +14,7 @@ var StreamAnalyzer = React.createClass({
             return null;
         }
 
-        return React.createElement("span", {}, "Samples Seen: " + this.props.numSamples);
+        return React.createElement("span", {}, "Samples: " + this.props.numSamples);
     },
 
     render: function() {
@@ -21,7 +22,7 @@ var StreamAnalyzer = React.createClass({
             {
                 id: 'stream-sampler'
             },
-            React.createElement("h3", {}, "Analytics"),
+            React.createElement("h3", {}, this.props.title),
             React.createElement("div", {}, this.props.status),
             this.getSamplesCountComponent_(),
             React.createElement(ResultsMap,
